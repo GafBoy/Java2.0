@@ -1,60 +1,48 @@
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Base {
     public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
-        System.out.println("Введите 1(чтобы запустить калькулятор) или 2(чтобы запустить поиск макс. элемента в массиве): ");
-        Integer number = console.nextInt();
-        if (number.equals(1)){
-            System.out.println("Запускаем калькулятор.");
-            calculator();
-        }
-        if (number.equals(2)){
-            System.out.println("Запускаем поиск самого длинного слова");
-            findMax();
-        }
-    }
 
-    private static void calculator() {
-        Scanner console = new Scanner(System.in);
-        System.out.print("Введите дробное число: ");
-        Float first = console.nextFloat();
-        System.out.print("Введите символ операции (+,-,/,*): ");
-        String operation = console.next();
-        System.out.print("Введите дробное число: ");
-        Float second = console.nextFloat();
-        if (operation.equals("+")) {
-            System.out.printf("%.4f + %.4f = %.4f", first, second, first + second);
-        }
-        if (operation.equals("-")) {
-            System.out.printf("%.4f - %.4f = %.4f", first, second, first - second);
-        }
-        if (operation.equals("*")) {
-            System.out.printf("%.4f * %.4f = %.4f", first, second, first * second);
-        }
-        if (operation.equals("/")) {
-            System.out.printf("%.4f / %.4f = %.4f", first, second, first / second);
-        }
-    }
-    private static void findMax(){
-        Scanner console = new Scanner(System.in);
-        System.out.print("Введите количество слов в массиве: ");
-        Integer n = console.nextInt();
-        String arr[] = new String[n];
-        for (int i = 0; i < n; i++) {
-            System.out.println("Введите слово " + (i+1) + ":" );
-            arr[i] = console.next();
-        }
-        Integer max = -1;
-        String maxWord = " ";
-        for (int i = 0; i < n; i++) {
-           String word = arr[i];
-            if (word.length() > max) {
-                max = word.length();
-                maxWord = word;
+        int[] mass;
+        //создать массив int на 20 элементов
+        mass = new int[20];
+        int i = 0;
+        //заполнить этот массив числами от 0 до 19
+        while (i < 20) {
+            mass[i] = ThreadLocalRandom.current().nextInt(-10, 10+1);
+            i++;
 
+        }
+        printArr(mass);
+        int min = 100;
+        int l = 0;
+        int minPos = -1;
+        int maxPos = -1;
+        int max = -100;
+        while (l < 20) {
+            if (mass[l] < min && mass[l] >= 0) {
+                min = mass[l];
+                minPos = l;
             }
+            if (mass[l] > max && mass[l] < 0) {
+                max = mass[l];
+                maxPos = l;
+            }
+            l++;
+
         }
-        System.out.println("Самое длинное слово в массиве: " + maxWord);
+        mass[minPos] = max;
+        mass[maxPos] = min;
+        System.out.println();
+        printArr(mass);
+
+    }
+    private static void printArr(int mass[]){
+        int i = 0;
+        while (i<mass.length) {
+            System.out.print(mass[i] + " ");
+            i++;
+        }
     }
 }
