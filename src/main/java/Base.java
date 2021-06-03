@@ -1,30 +1,48 @@
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Base {
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        Calculator calculator = new Calculator();
-        calculator
-                .addCommand("+", new Plus())
-                .addCommand("-", new Minus())
-                .addCommand("/", new Divide())
-                .addCommand("*", new Multiply());
-        System.out.println("Добро пожаловать в программу Калькулятор");
-        while(true){
-            System.out.println("Введите 1 для расчета и 2 для выхода из программы:");
-            int i = scanner.nextInt();
-            if (i == 1){
-                calculator.getFirstArgFromUser();
-                calculator.getCommandFromUser();
-                calculator.getSecondArgFromUser();
-                calculator.printResult();
-            }else if (i == 2){
-                break;
-            }else {
-                System.out.println("Введите пожалуйста только 1 или 2!");
+        int[] mass;
+        //создать массив int на 20 элементов
+        mass = new int[20];
+        int i = 0;
+        //заполнить этот массив числами от 0 до 19
+        while (i < 20) {
+            mass[i] = ThreadLocalRandom.current().nextInt(-10, 10+1);
+            i++;
+
+        }
+        printArr(mass);
+        int min = 100;
+        int l = 0;
+        int minPos = -1;
+        int maxPos = -1;
+        int max = -100;
+        while (l < 20) {
+            if (mass[l] < min && mass[l] > 0) {
+                min = mass[l];
+                minPos = l;
             }
+            if (mass[l] > max && mass[l] < 0) {
+                max = mass[l];
+                maxPos = l;
+            }
+            l++;
+
+        }
+        mass[minPos] = max;
+        mass[maxPos] = min;
+        System.out.println();
+        printArr(mass);
+
+    }
+    private static void printArr(int mass[]){
+        int i = 0;
+        while (i<mass.length) {
+            System.out.print(mass[i] + " ");
+            i++;
         }
     }
 }
