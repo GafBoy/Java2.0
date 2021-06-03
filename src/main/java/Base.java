@@ -1,29 +1,25 @@
 import java.util.Scanner;
 
 public class Base {
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        Calculator calculator = new Calculator();
-        calculator
-                .addCommand("+", new Plus())
-                .addCommand("-", new Minus())
-                .addCommand("/", new Divide())
-                .addCommand("*", new Multiply());
-        System.out.println("Добро пожаловать в программу Калькулятор");
-        while(true){
-            System.out.println("Введите 1 для расчета и 2 для выхода из программы:");
+        while (true){
+            System.out.println("Введите 1 для расчета или 2 для выхода из программы");
             int i = scanner.nextInt();
-            if (i == 1){
-                calculator.getFirstArgFromUser();
-                calculator.getCommandFromUser();
-                calculator.getSecondArgFromUser();
-                calculator.printResult();
-            }else if (i == 2){
+            if (i == 2){
+                System.out.println("До свидания!");
                 break;
+            }else if (i == 1){
+                System.out.println("Введите первое число:");
+                float first = scanner.nextFloat();
+                System.out.println("Введите операцию: (+, -, *, /)");
+                String operation = scanner.next();
+                System.out.println("Введите второе число:");
+                float second = scanner.nextFloat();
+                Float result = new Calculator(first, operation, second).calc();
+                System.out.printf("Результат: %.4f\n", result);
             }else {
-                System.out.println("Введите пожалуйста только 1 или 2!");
+                System.out.println("Вводите только 1 или 2 пожалуйста!");
             }
         }
     }
