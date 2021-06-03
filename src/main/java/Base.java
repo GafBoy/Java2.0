@@ -1,30 +1,21 @@
 import java.util.Scanner;
 
 public class Base {
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner console = new Scanner(System.in); // Создаем объект для считывания данных с консоли.
+        System.out.print("Введите дробное число: "); // Выводим на консоль сообщение.
+        Float first = console.nextFloat(); // Считываем введенное пользователем число.
+        System.out.print("Введите дробное число: ");
+        Float second = console.nextFloat();
+        System.out.printf( "Сумма= %.4f", add(first, second)); // Выводим результат с помощью форматирования.
+    }
 
-        Calculator calculator = new Calculator();
-        calculator
-                .addCommand("+", new Plus())
-                .addCommand("-", new Minus())
-                .addCommand("/", new Divide())
-                .addCommand("*", new Multiply());
-        System.out.println("Добро пожаловать в программу Калькулятор");
-        while(true){
-            System.out.println("Введите 1 для расчета и 2 для выхода из программы:");
-            int i = scanner.nextInt();
-            if (i == 1){
-                calculator.getFirstArgFromUser();
-                calculator.getCommandFromUser();
-                calculator.getSecondArgFromUser();
-                calculator.printResult();
-            }else if (i == 2){
-                break;
-            }else {
-                System.out.println("Введите пожалуйста только 1 или 2!");
-            }
-        }
+    /*
+     * Метод для сложения двух чисел с плавающей запятой
+     * @param first - первый аргумент
+     * @param second - второй аргумент
+    * */
+    public static Float add (Float first, Float second){
+        return first+second;
     }
 }
