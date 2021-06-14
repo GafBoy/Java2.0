@@ -1,9 +1,3 @@
-/*
- * Сделал как вы попросили
- * Примечание: Не очень понимаю почему такую реализацию можно назвать "ООП"?
- * На мой взгляд это можно заменить просто методом "calc" - и ничего не поменяется.
- *
- * */
 public class Calculator {
     private final String operation;
     private final Float first;
@@ -17,17 +11,26 @@ public class Calculator {
 
     public Float calc(){
         Float result = null;
-        if (operation.equals("+")) {
-            result = first + second;
-        }
-        if (operation.equals("-")) {
-            result = first - second;
-        }
-        if (operation.equals("*")) {
-            result = first * second;
-        }
-        if (operation.equals("/")) {
-            result = first / second;
+        try {
+            if (operation.equals("+")) {
+                result = first + second;
+            }
+            if (operation.equals("-")) {
+                result = first - second;
+            }
+            if (operation.equals("*")) {
+                result = first * second;
+            }
+            if (operation.equals("/")) {
+                if (second == 0){
+                    throw new ArithmeticException("Делить на ноль нельзя!");
+                }
+                result = first / second;
+            }
+        }catch (ArithmeticException ex){
+            throw ex;
+        } catch (RuntimeException ex){
+            ex.printStackTrace();
         }
         return result;
     }
