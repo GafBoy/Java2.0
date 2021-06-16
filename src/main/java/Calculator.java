@@ -9,28 +9,22 @@ public class Calculator {
         this.second = second;
     }
 
-    public Float calc(){
+    public Float calc() {
         Float result = null;
-        try {
-            if (operation.equals("+")) {
-                result = first + second;
+        if (operation.equals("+")) {
+            result = first + second;
+        }
+        if (operation.equals("-")) {
+            result = first - second;
+        }
+        if (operation.equals("*")) {
+            result = first * second;
+        }
+        if (operation.equals("/")) {
+            if (second == 0) {
+                throw new ArithmeticException("Делить на ноль нельзя!");
             }
-            if (operation.equals("-")) {
-                result = first - second;
-            }
-            if (operation.equals("*")) {
-                result = first * second;
-            }
-            if (operation.equals("/")) {
-                if (second == 0){
-                    throw new ArithmeticException("Делить на ноль нельзя!");
-                }
-                result = first / second;
-            }
-        }catch (ArithmeticException ex){
-            throw ex;
-        } catch (RuntimeException ex){
-            ex.printStackTrace();
+            result = first / second;
         }
         return result;
     }
