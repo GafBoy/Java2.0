@@ -11,20 +11,24 @@ public class Calculator {
 
     public Float calc() {
         Float result = null;
-        if (operation.equals("+")) {
-            result = first + second;
-        }
-        if (operation.equals("-")) {
-            result = first - second;
-        }
-        if (operation.equals("*")) {
-            result = first * second;
-        }
-        if (operation.equals("/")) {
-            if (second == 0) {
-                throw new ArithmeticException("Делить на ноль нельзя!");
-            }
-            result = first / second;
+        switch (operation) {
+            case "+":
+                result = first + second;
+                break;
+            case "-":
+                result = first - second;
+                break;
+            case "*":
+                result = first * second;
+                break;
+            case "/":
+                if (second == 0) {
+                    throw new ArithmeticException("Делить на ноль нельзя!");
+                }
+                result = first / second;
+                break;
+            default:
+                throw new RuntimeException("Введенная вами операция '"+ operation +"' отсутствует");
         }
         return result;
     }

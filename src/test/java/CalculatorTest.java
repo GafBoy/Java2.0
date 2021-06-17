@@ -23,10 +23,9 @@ public class CalculatorTest {
                 Arguments.of(1.2f,  "*",    3f,     3.6000001f),
                 Arguments.of(0f,    "*",    3f,     0f),
                 Arguments.of(0f,    "/",    3f,     0f),
-                Arguments.of(0f,   "/",    1f,     0f),
+                Arguments.of(10f,   "/",    5f,     2f),
                 Arguments.of(5f,    "/",    2f,     2.5f),
-                Arguments.of(5f,    "/",    5f,     1f),
-                Arguments.of(5f,    "*",    2f,     10f)
+                Arguments.of(5f,    "/",    5f,     1f)
         );
     }
 
@@ -40,5 +39,12 @@ public class CalculatorTest {
     void divisionByZeroTest(){
         ArithmeticException arithmeticException = Assertions.assertThrows(ArithmeticException.class, () -> new Calculator(1f, "/", 0f).calc());
         Assertions.assertEquals("Делить на ноль нельзя!", arithmeticException.getMessage());
+    }
+
+    @Test
+    void wrongOperationTest(){
+        String wrongOperation = "123";
+        RuntimeException wrongOperationException = Assertions.assertThrows(RuntimeException.class, () -> new Calculator(1f, wrongOperation, 0f).calc());
+        Assertions.assertEquals("Введенная вами операция '" + wrongOperation + "' отсутствует", wrongOperationException.getMessage());
     }
 }

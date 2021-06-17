@@ -25,7 +25,8 @@ public class Base {
             }catch (ArithmeticException ex){
                 System.out.println(ex.getMessage());
             }catch (RuntimeException ex){
-                System.out.println("Произошла ошибка связанная с введенными значениями.");
+                System.out.print("Произошла ошибка связанная с введенными значениями:");
+                System.out.println("'"+ ex.getMessage() + "'");
                 System.out.println("Пожалуйста вводите только допустимые значения\n");
                 scanner.nextLine();
             }
